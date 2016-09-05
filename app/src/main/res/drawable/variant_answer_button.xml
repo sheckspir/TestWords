@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true" android:drawable="@drawable/right_answer_button"/>
+    <item>
+        <shape>
+            <stroke android:color="@color/bord_answer_button" android:width="@dimen/button_bord_size"/>
+            <corners android:radius="@dimen/button_curve_radius" />
+        </shape>
+    </item>
+</selector>

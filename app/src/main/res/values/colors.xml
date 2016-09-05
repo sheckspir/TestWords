@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="main_background">#FFFFFF</color>
+    <color name="orange_button">#FC6E51</color>
+    <color name="orange_button_pressed">#FC3E31</color>
+    <color name="bord_answer_button">#D4D4D4</color>
+    <color name="right_answer_button">#ADD166</color>
+    <color name="wrong_answer_button">#FF8080</color>
+    <color name="yellow_green_button">#8CC152</color>
+    <color name="yellow_green_button_pressed">#8CB152</color>
+    <color name="progress_bar">#DDDDDD</color>
+    <color name="clicable_text">#5E9CEC</color>
+
+    <color name="text_dark_button">#FFFFFF</color>
+</resources>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer-array name="words_keys">
+        <item>211138</item>
+        <item>226138</item>
+        <item>177344</item>
+        <item>196957</item>
+        <item>224324</item>
+        <item>89785</item>
+        <item>79639</item>
+        <item>173148</item>
+        <item>136709</item>
+        <item>158582</item>
+        <item>92590</item>
+        <item>135793</item>
+        <item>68068</item>
+        <item>64441</item>
+        <item>46290</item>
+        <item>128173</item>
+        <item>51254</item>
+        <item>55112</item>
+        <item>222435</item>
+    </integer-array>
+</resources>
