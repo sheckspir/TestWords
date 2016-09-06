@@ -69,6 +69,7 @@ public class ExerciseFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //+
         if (getArguments().containsKey(ARG_WORD)) {
             word = (Word) getArguments().getSerializable(ARG_WORD);
         } else {
@@ -93,6 +94,7 @@ public class ExerciseFragment extends Fragment {
             button.setTextColor(getResources().getColor(R.color.text_dark_button));
             if (word.getText().equals((button).getText())) {
                 showCard(true);
+                //Deprecated же
                 button.setBackground(getResources().getDrawable(R.drawable.right_answer_button));
             } else {
                 showCard(false);
@@ -114,6 +116,7 @@ public class ExerciseFragment extends Fragment {
         wordTextView.setText(word.getTranslation());
         List<String> shuffleAlternatives = word.getVariants(COUNT_VARIANTS);
 
+        //Ну RecyclerView же) в крайнем случае LinearLayout
         firstButton.setText(shuffleAlternatives.get(0));
         secondButton.setText(shuffleAlternatives.get(1));
         thirdButton.setText(shuffleAlternatives.get(2));

@@ -66,6 +66,7 @@ public class TrainingActivity extends Activity implements TrainingCallback {
             listOfKeys = listOfKeys.subList(0, LIMIT_OF_TEST);
         }
 
+        //Не совсем понятно зачем нужна такая вложенность. Достаточно activity и сменяющихся фрагментов
         Fragment fragment = getFragmentManager().findFragmentById(R.id.fragment_container);
         if (fragment == null) {
             trainingFragment = TrainingFragment.newInstance(toIntArray(listOfKeys));

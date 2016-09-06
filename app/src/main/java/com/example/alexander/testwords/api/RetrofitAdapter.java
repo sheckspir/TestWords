@@ -24,6 +24,8 @@ public class RetrofitAdapter {
     private static RetrofitAdapter instance;
     private Retrofit retrofit;
 
+    //Непотокобезопасно, синглтон надо нормально уметь писать
+    //Зачем хранить инстанс адаптера, почему бы не хранить инстанс API?
     public static RetrofitAdapter getInstance() {
         if (instance == null) {
             instance = new RetrofitAdapter();

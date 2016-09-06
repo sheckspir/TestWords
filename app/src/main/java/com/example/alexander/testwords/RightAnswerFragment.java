@@ -63,6 +63,7 @@ public class RightAnswerFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //А почему тут нет IllegalState?
         if (getArguments() != null && getArguments().containsKey(ARG_WORD)) {
             word = (Word) getArguments().getSerializable(ARG_WORD);
         }

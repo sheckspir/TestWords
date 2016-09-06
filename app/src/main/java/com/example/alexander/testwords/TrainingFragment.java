@@ -66,6 +66,7 @@ public class TrainingFragment extends Fragment {
         onAttachToContext(context);
     }
 
+    //Зачем?
     @SuppressWarnings("deprecation")
     @Override
     public void onAttach(Activity activity) {
@@ -129,9 +130,11 @@ public class TrainingFragment extends Fragment {
         }
     }
 
+    //Почему upload?)
     private void uploadWords() {
         if (isAdded() && !isDetached()) {
             progressDialog = ProgressDialog.show(getActivity(),getString(R.string.download_list_for_task),null,true);
+            //Make me unseen that
             String idsSplitedByComma = Arrays.toString(idsTestWords);
             idsSplitedByComma = idsSplitedByComma.replace("[","");
             idsSplitedByComma = idsSplitedByComma.replace("]","");
@@ -183,12 +186,14 @@ public class TrainingFragment extends Fragment {
         Collections.sort(wordList, new Comparator<Word>() {
             @Override
             public int compare(Word word, Word t1) {
+                //http://301-1.ru/gen-mems/img_mems/cc2226a32aa918a7a53c38455ba96c40.jpg
                 return random.nextInt();
             }
         });
     }
 
 
+    //Не логичнее ли было выполнить запрос в Activity?
     private class DictionaryCallback implements Callback<List<Word>> {
         boolean isComplete;
 
