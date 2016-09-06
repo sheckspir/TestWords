@@ -64,8 +64,11 @@ public class RightAnswerFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //А почему тут нет IllegalState?
+        // (Y)
         if (getArguments() != null && getArguments().containsKey(ARG_WORD)) {
             word = (Word) getArguments().getSerializable(ARG_WORD);
+        } else {
+            throw new IllegalArgumentException(RightAnswerFragment.class.getSimpleName() + " should be initialized by newInstance() method");
         }
     }
 

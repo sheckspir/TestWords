@@ -67,6 +67,10 @@ public class TrainingActivity extends Activity implements TrainingCallback {
         }
 
         //Не совсем понятно зачем нужна такая вложенность. Достаточно activity и сменяющихся фрагментов
+        // в принципе этого бы хватило, но я изучал какой видео урок о запросах к серверу от одного из разработчиков mail.ru
+        // и в нём советовали запросы сохранять во фрагметах, потому как они не так часто разрушаются как активности (например поворот экрана)
+        // и мы тем самым защищаем себя от случая если запрос завершился пока экран переворачивался.
+        // А также в данном случае я сделал TrainingFragment более универсальным, мы можем запихивать его в другие активности с другими планами тренировок (на пример другие темы)
         Fragment fragment = getFragmentManager().findFragmentById(R.id.fragment_container);
         if (fragment == null) {
             trainingFragment = TrainingFragment.newInstance(toIntArray(listOfKeys));

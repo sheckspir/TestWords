@@ -3,6 +3,8 @@ package com.example.alexander.testwords;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -91,15 +93,32 @@ public class ExerciseFragment extends Fragment {
     public void onClickAnswer(View view) {
         if (view instanceof Button) {
             Button button = (Button) view;
-            button.setTextColor(getResources().getColor(R.color.text_dark_button));
+            int textColor;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                textColor = getActivity().getColor(R.color.text_dark_button);
+            } else {
+                //noinspection deprecation
+                textColor = getResources().getColor(R.color.text_dark_button);
+            }
+            button.setTextColor(textColor);
+            int drawableResource;
             if (word.getText().equals((button).getText())) {
                 showCard(true);
                 //Deprecated же
-                button.setBackground(getResources().getDrawable(R.drawable.right_answer_button));
+                //ну вообще конечно да, но так не хотелось писать вот эту конструкцию, как здесь так и с getColor выше
+                drawableResource = R.drawable.right_answer_button;
             } else {
                 showCard(false);
-                button.setBackground(getResources().getDrawable(R.drawable.wrong_answer_button));
+                drawableResource = R.drawable.wrong_answer_button;
             }
+            Drawable drawable;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+                drawable = getActivity().getDrawable(drawableResource);
+            } else {
+                //noinspection deprecation
+                drawable = getResources().getDrawable(drawableResource);
+            }
+            button.setBackground(drawable);
         }
     }
 
@@ -117,6 +136,7 @@ public class ExerciseFragment extends Fragment {
         List<String> shuffleAlternatives = word.getVariants(COUNT_VARIANTS);
 
         //Ну RecyclerView же) в крайнем случае LinearLayout
+        // *"в крайнем случае ListView"? Да это я чё-то затупил....
         firstButton.setText(shuffleAlternatives.get(0));
         secondButton.setText(shuffleAlternatives.get(1));
         thirdButton.setText(shuffleAlternatives.get(2));

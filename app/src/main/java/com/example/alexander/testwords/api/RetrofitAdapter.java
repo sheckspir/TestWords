@@ -21,15 +21,16 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitAdapter {
     private static final String BASE_URL = "http://dictionary.skyeng.ru/api/v1/";
-    private static RetrofitAdapter instance;
+    private static RetrofitAdapter instance = new RetrofitAdapter();
     private Retrofit retrofit;
 
     //Непотокобезопасно, синглтон надо нормально уметь писать
     //Зачем хранить инстанс адаптера, почему бы не хранить инстанс API?
+    // На счёт потокобезопасности соглашусь на 100%. Думаю решение с не ленивой инициализацией будет подходящим
+    // это сделает его потокобезопасным, а ленивость нам тут не к чему, если мы будем обращаться к адаптеру, то только за получением апи
+    // В данном случае причин не хранить инстанс API не вижу. Но если разделять апи и делать их в виде нескольких классов, это может потребовать
+    // больше затрат на поддержку, а также меньше затребует на хранение в памяти, что потенциально уменьшит вероятность OutOfMemory.
     public static RetrofitAdapter getInstance() {
-        if (instance == null) {
-            instance = new RetrofitAdapter();
-        }
         return instance;
     }
 

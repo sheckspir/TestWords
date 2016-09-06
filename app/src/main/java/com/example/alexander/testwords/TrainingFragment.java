@@ -67,6 +67,8 @@ public class TrainingFragment extends Fragment {
     }
 
     //Зачем?
+    // Зачем дважды этот метод? Когда не используешь библиотеку поддержки, тогда onAttach(Context) не будет вызван
+    // Зачем @SuppressWarnings("deprecation")? Не люблю когда глаза мозолят всякие лишнии сообщения...
     @SuppressWarnings("deprecation")
     @Override
     public void onAttach(Activity activity) {
@@ -107,7 +109,7 @@ public class TrainingFragment extends Fragment {
         super.onResume();
         if (dictionaryCallback == null
                 || (dictionaryCallback.isComplete && trainingWords == null)) {
-            uploadWords();
+            loadWords();
         }
     }
 
@@ -131,10 +133,13 @@ public class TrainingFragment extends Fragment {
     }
 
     //Почему upload?)
-    private void uploadWords() {
+    //doh!
+    private void loadWords() {
         if (isAdded() && !isDetached()) {
             progressDialog = ProgressDialog.show(getActivity(),getString(R.string.download_list_for_task),null,true);
             //Make me unseen that
+            // могу только извиниться, но я не придумал другого решения. Можно в принципе в адаптер засунуть метод который это будет делать, будет уже симпатичнее
+            // также как вариант можно обернуть idsTestWords в другой класс и написать для него свой deserializer. Да действительно это было бы лучше
             String idsSplitedByComma = Arrays.toString(idsTestWords);
             idsSplitedByComma = idsSplitedByComma.replace("[","");
             idsSplitedByComma = idsSplitedByComma.replace("]","");
@@ -182,18 +187,13 @@ public class TrainingFragment extends Fragment {
     }
 
     private void unsortList(final List<Word> wordList) {
-        final Random random = new Random();
-        Collections.sort(wordList, new Comparator<Word>() {
-            @Override
-            public int compare(Word word, Word t1) {
-                //http://301-1.ru/gen-mems/img_mems/cc2226a32aa918a7a53c38455ba96c40.jpg
-                return random.nextInt();
-            }
-        });
+        //oops
+        Collections.shuffle(wordList);
     }
 
 
     //Не логичнее ли было выполнить запрос в Activity?
+    // Выполняя запрос во фрагменте я защищаюсь от пересоздания activity за счёт setRetainInstance(true)
     private class DictionaryCallback implements Callback<List<Word>> {
         boolean isComplete;
 
