@@ -49,6 +49,7 @@ public class TrainingFragment extends Fragment {
     private ExerciseFragment exerciseFragment;
     private RightAnswerFragment rightAnswerFragment;
     private ProgressDialog progressDialog;
+    private DictionaryCallback dictionaryCallback;
     private TrainingCallback trainingCallback;
 
     public static TrainingFragment newInstance(int[] idsWords) {
@@ -103,7 +104,8 @@ public class TrainingFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        if (trainingWords == null) {
+        if (dictionaryCallback == null
+                || (dictionaryCallback.isComplete && trainingWords == null)) {
             uploadWords();
         }
     }
@@ -188,8 +190,11 @@ public class TrainingFragment extends Fragment {
 
 
     private class DictionaryCallback implements Callback<List<Word>> {
+        boolean isComplete;
+
         @Override
         public void onResponse(Call<List<Word>> call, Response<List<Word>> response) {
+            isComplete = true;
             if (response.isSuccessful()) {
                 progressDialog.cancel();
                 uploadCompleteStartTraining(response.body());
@@ -200,6 +205,7 @@ public class TrainingFragment extends Fragment {
 
         @Override
         public void onFailure(Call<List<Word>> call, Throwable t) {
+            isComplete = true;
             Log.e(TAG, "onFailure : ", t);
             if (isAdded() && !isDetached()) {
                 if (t instanceof UnknownHostException || t instanceof TimeoutException) {
